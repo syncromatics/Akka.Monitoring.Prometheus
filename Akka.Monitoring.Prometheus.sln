@@ -1,0 +1,56 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2006
+MinimumVisualStudioVersion = 15.0.26124.0
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{43141A2A-2C06-445D-A512-BEC49AAB9CFF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Akka.Monitoring.Prometheus", "src\Akka.Monitoring.Prometheus\Akka.Monitoring.Prometheus.csproj", "{BF0D52B2-BB31-4071-9E89-730FACEB5752}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Akka.Monitoring.Prometheus.Demo", "src\Akka.Monitoring.Prometheus.Demo\Akka.Monitoring.Prometheus.Demo.csproj", "{F9A5B388-32E1-4F54-BF01-0358948F6102}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BF0D52B2-BB31-4071-9E89-730FACEB5752}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF0D52B2-BB31-4071-9E89-730FACEB5752}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF0D52B2-BB31-4071-9E89-730FACEB5752}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BF0D52B2-BB31-4071-9E89-730FACEB5752}.Debug|x64.Build.0 = Debug|Any CPU
+		{BF0D52B2-BB31-4071-9E89-730FACEB5752}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BF0D52B2-BB31-4071-9E89-730FACEB5752}.Debug|x86.Build.0 = Debug|Any CPU
+		{BF0D52B2-BB31-4071-9E89-730FACEB5752}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF0D52B2-BB31-4071-9E89-730FACEB5752}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF0D52B2-BB31-4071-9E89-730FACEB5752}.Release|x64.ActiveCfg = Release|Any CPU
+		{BF0D52B2-BB31-4071-9E89-730FACEB5752}.Release|x64.Build.0 = Release|Any CPU
+		{BF0D52B2-BB31-4071-9E89-730FACEB5752}.Release|x86.ActiveCfg = Release|Any CPU
+		{BF0D52B2-BB31-4071-9E89-730FACEB5752}.Release|x86.Build.0 = Release|Any CPU
+		{F9A5B388-32E1-4F54-BF01-0358948F6102}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9A5B388-32E1-4F54-BF01-0358948F6102}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9A5B388-32E1-4F54-BF01-0358948F6102}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F9A5B388-32E1-4F54-BF01-0358948F6102}.Debug|x64.Build.0 = Debug|Any CPU
+		{F9A5B388-32E1-4F54-BF01-0358948F6102}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F9A5B388-32E1-4F54-BF01-0358948F6102}.Debug|x86.Build.0 = Debug|Any CPU
+		{F9A5B388-32E1-4F54-BF01-0358948F6102}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9A5B388-32E1-4F54-BF01-0358948F6102}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9A5B388-32E1-4F54-BF01-0358948F6102}.Release|x64.ActiveCfg = Release|Any CPU
+		{F9A5B388-32E1-4F54-BF01-0358948F6102}.Release|x64.Build.0 = Release|Any CPU
+		{F9A5B388-32E1-4F54-BF01-0358948F6102}.Release|x86.ActiveCfg = Release|Any CPU
+		{F9A5B388-32E1-4F54-BF01-0358948F6102}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BF0D52B2-BB31-4071-9E89-730FACEB5752} = {43141A2A-2C06-445D-A512-BEC49AAB9CFF}
+		{F9A5B388-32E1-4F54-BF01-0358948F6102} = {43141A2A-2C06-445D-A512-BEC49AAB9CFF}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D35E7A11-B1AA-4562-AEC6-675C93991502}
+	EndGlobalSection
+EndGlobal

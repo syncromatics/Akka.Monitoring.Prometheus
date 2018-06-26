@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Syncromatics Engineering</Authors>
+    <Company>Syncromatics Corporation</Company>
+    <Description>Akka.net monitoring adapter for Prometheus</Description>
+    <Copyright>2017 Syncromatics Corporation</Copyright>
+    <PackageLicenseUrl>https://github.com/syncromatics/Akka.Monitoring.Prometheus/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/syncromatics/Akka.Monitoring.Prometheus</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/syncromatics/Akka.Monitoring.Prometheus</RepositoryUrl>
+    <PackageTags>akka.net,Prometheus,monitoring,akka.monitoring</PackageTags>
+    <Version>0.0.0-develop</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Akka.Monitoring" Version="0.7.0" />
+    <PackageReference Include="prometheus-net" Version="2.1.0" />
+  </ItemGroup>
+
+</Project>
