@@ -77,12 +77,12 @@ namespace Akka.Monitoring.Prometheus
                 {
                     new
                     {
-                        Label = "sytem",
+                        Label = nameof(system),
                         Value = system,
                     },
                     new
                     {
-                        Label = "actor",
+                        Label = nameof(actor),
                         Value = actor,
                     },
                 })
