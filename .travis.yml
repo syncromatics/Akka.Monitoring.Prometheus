@@ -11,5 +11,5 @@ script:
   - "if [[ $TRAVIS_PULL_REQUEST == 'false' && $TRAVIS_TAG ]]; then
   dotnet build ./src/Akka.Monitoring.Prometheus --configuration Release /p:Version=$TRAVIS_TAG;
   dotnet pack ./src/Akka.Monitoring.Prometheus --configuration Release /p:Version=$TRAVIS_TAG;
-  dotnet nuget push ./src/Akka.Monitoring.Prometheus/bin/Release/*.nupkg -k $NUGET_API_KEY -s https://www.nuget.org/api/v2/package
+  dotnet nuget push ./src/Akka.Monitoring.Prometheus/bin/Release/*.nupkg -k $NUGET_API_KEY -s https://www.nuget.org/api/v2/package;
   fi"
