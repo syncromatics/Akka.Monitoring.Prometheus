@@ -18,7 +18,7 @@ namespace Akka.Monitoring.Prometheus.Demo
             Console.WriteLine("Starting up actor system...");
             var system = ActorSystem.Create("akka-performance-demo");
 
-            var didMonitorRegister = ActorMonitoringExtension.RegisterMonitor(system, new ActorPrometheusMonitor());
+            var didMonitorRegister = ActorMonitoringExtension.RegisterMonitor(system, new ActorPrometheusMonitor(system));
             Console.WriteLine(didMonitorRegister
                 ? "Successfully registered Prometheus monitor"
                 : "Failed to register Prometheus monitor");
@@ -30,6 +30,8 @@ namespace Akka.Monitoring.Prometheus.Demo
                 var charon = system.ActorOf<CharonActor>();
                 charon.Tell(pluto); 
             }
+
+            Thread.Sleep(TimeSpan.FromSeconds(15));
 
             Console.WriteLine("Shutting down...");
             system.Terminate().Wait();

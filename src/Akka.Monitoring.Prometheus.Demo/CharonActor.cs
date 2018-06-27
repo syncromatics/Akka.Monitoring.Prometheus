@@ -1,4 +1,5 @@
-﻿using Akka.Actor;
+﻿using System;
+using Akka.Actor;
 using Akka.Dispatch.SysMsg;
 using Akka.Event;
 
@@ -26,6 +27,7 @@ namespace Akka.Monitoring.Prometheus.Demo
                 Sender.Tell(new WeGoRoundAndRound());
                 Context.GetLogger().Warning("From out here...");
                 Self.Tell(PoisonPill.Instance);
+                Context.Gauge($@"responder{{session={Guid.NewGuid():N},thing=""value with spaces""}}");
             });
 
             Receive<Stop>(_ =>

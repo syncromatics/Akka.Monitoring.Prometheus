@@ -1,7 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
+using Akka.Actor;
 using Akka.Monitoring.Impl;
+using DestructureExtensions;
 using Prometheus;
 
 namespace Akka.Monitoring.Prometheus
@@ -9,9 +14,18 @@ namespace Akka.Monitoring.Prometheus
     public class ActorPrometheusMonitor : AbstractActorMonitoringClient
     {
         private readonly Random _random = new Random();
-        private readonly ConcurrentDictionary<string, Counter> _countersByMetricName = new ConcurrentDictionary<string, Counter>();
-        private readonly ConcurrentDictionary<string, Summary> _summariesByMetricName = new ConcurrentDictionary<string, Summary>();
-        private readonly ConcurrentDictionary<string, Gauge> _gaugesByMetricName = new ConcurrentDictionary<string, Gauge>();
+        private string _name;
+
+
+        public ActorPrometheusMonitor(ActorSystem system)
+        {
+            _name = system.Name;
+        }
+
+        private bool IsSpecificMetric(string metricName)
+        {
+            return metricName.StartsWith($"{_name}.");
+        }
 
         private bool ShouldSample(double sampleRate)
         {
@@ -42,34 +56,69 @@ namespace Akka.Monitoring.Prometheus
             return mn;
         }
 
+        private static (string metric, Dictionary<string, string> labels) Metric(string metricName)
+        {
+            var (system, actor, metricWithLabels, _) = metricName.Split(new[] {'.'}, 3);
+            var (metric, labelString, _) = metricWithLabels.Split(new[] {'{'}, 2);
+            var labels = (labelString ?? "")
+                .Trim('\'', '"', '}')
+                .Split(',')
+                .Where(pair => !string.IsNullOrWhiteSpace(pair))
+                .Select(pair =>
+                {
+                    var (label, value, _) = pair.Split(new[] {'='}, 2);
+                    return new
+                    {
+                        Label = label.Trim('\'', '"', '`'),
+                        Value = value.Trim('\'', '"', '`'),
+                    };
+                })
+                .Concat(new[]
+                {
+                    new
+                    {
+                        Label = "sytem",
+                        Value = system,
+                    },
+                    new
+                    {
+                        Label = "actor",
+                        Value = actor,
+                    },
+                })
+                .ToDictionary(x => x.Label, x => x.Value);
+            return (metric, labels);
+        }
+
         public override void UpdateCounter(string metricName, int delta, double sampleRate)
         {
-            var counter = _countersByMetricName.GetOrAdd(StripInvalidChars(metricName), key => Metrics.CreateCounter(key, key));
-
+            if (!IsSpecificMetric(metricName)) return;
             if (!ShouldSample(sampleRate)) return;
-
-            counter.Inc(delta);
+            var (metric, labels) = Metric(metricName);
+            var counter = Metrics.CreateCounter(StripInvalidChars(metric), metric, labels.Keys.ToArray());
+            counter.Labels(labels.Values.ToArray()).Inc(delta);
         }
 
         public override void UpdateTiming(string metricName, long time, double sampleRate)
         {
-            var summary = _summariesByMetricName.GetOrAdd(StripInvalidChars(metricName), key => Metrics.CreateSummary(key, key));
-
+            if (!IsSpecificMetric(metricName)) return;
             if (!ShouldSample(sampleRate)) return;
-
-            summary.Observe(time);
+            var (metric, labels) = Metric(metricName);
+            var timing = Metrics.CreateSummary(StripInvalidChars(metric), metric, labels.Keys.ToArray());
+            timing.Labels(labels.Values.ToArray()).Observe(time);
         }
 
         public override void UpdateGauge(string metricName, int value, double sampleRate)
         {
-            var gauge = _gaugesByMetricName.GetOrAdd(StripInvalidChars(metricName), key => Metrics.CreateGauge(key, key));
-
+            if (!IsSpecificMetric(metricName)) return;
             if (!ShouldSample(sampleRate)) return;
-
-            gauge.Set(value);
+            var (metric, labels) = Metric(metricName);
+            var timing = Metrics.CreateGauge(StripInvalidChars(metric), metric, labels.Keys.ToArray());
+            timing.Labels(labels.Values.ToArray()).Set(value);
         }
 
         //Unique name used to enforce a single instance of this client
+
         private static readonly int UniqueMonitoringClientId = new Guid("2385352d-f0a7-4919-8d7f-97a6e17c8122").GetHashCode();
 
         public override int MonitoringClientId => UniqueMonitoringClientId;
