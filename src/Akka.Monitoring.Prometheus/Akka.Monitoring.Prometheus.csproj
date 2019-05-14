@@ -17,7 +17,7 @@
   <ItemGroup>
     <PackageReference Include="Akka.Monitoring" Version="0.7.0" />
     <PackageReference Include="DestructureExtensions" Version="1.0.6" />
-    <PackageReference Include="prometheus-net" Version="2.1.0" />
+    <PackageReference Include="prometheus-net" Version="3.1.2" />
   </ItemGroup>
 
 </Project>
