@@ -1,9 +1,12 @@
 language: csharp
 
 os: linux
-dist: trusty
 sudo: required
-dotnet: 2.0.0
+dist: xenial
+
+language: csharp
+mono: none
+dotnet: 2.2.204
 
 script:
   - dotnet restore ./src/Akka.Monitoring.Prometheus
