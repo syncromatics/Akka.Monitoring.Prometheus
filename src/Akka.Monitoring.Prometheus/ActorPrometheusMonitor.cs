@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using Akka.Actor;
 using Akka.Monitoring.Impl;
 using DestructureExtensions;
@@ -14,8 +11,7 @@ namespace Akka.Monitoring.Prometheus
     public class ActorPrometheusMonitor : AbstractActorMonitoringClient
     {
         private readonly Random _random = new Random();
-        private string _name;
-
+        private readonly string _name;
 
         public ActorPrometheusMonitor(ActorSystem system)
         {
